@@ -1,0 +1,21 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-size: 15px;
+  /* background-image: linear-gradient(#200040, #40007f, white); */
+}
+
+.home {
+  background-image: linear-gradient(#200040, #40007f, white);
+}
+
+main {
+  min-height: 65vh;
+}
+
+p {
+  font-size: 16px;
+}
