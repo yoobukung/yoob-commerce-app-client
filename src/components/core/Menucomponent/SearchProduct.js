@@ -26,8 +26,6 @@ const SearchProduct = () => {
 
   const result = !searchTerm
     ? []
-    : products == "undefined" || "ไม่พบข้อมูล"
-    ? []
     : products.filter((product) =>
         product.name.toLowerCase().includes(searchTerm.toLowerCase())
       );

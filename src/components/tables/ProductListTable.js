@@ -3,7 +3,7 @@ import { Link, withRouter } from "react-router-dom";
 
 const ProductListTable = () => {
   return (
-    <table class="table table-hover">
+    <table class="table table-striped table-hover">
       <thead>
         <tr class="text-center">
           <th scope="col-1">ลำดับที่</th>

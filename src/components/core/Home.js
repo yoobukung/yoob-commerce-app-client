@@ -13,8 +13,8 @@ const Home = () => {
   const { reset } = useQueryErrorResetBoundary();
   return (
     <div className="home">
-      <div className="container mt-4 ">
-        <IntroHome />
+      <IntroHome />
+      <div className="container mt-4 home-contain">
         <p className="lead text-white">Welcome to my E-Commerce App</p>
         <ErrorBoundary
           onReset={reset}

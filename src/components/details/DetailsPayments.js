@@ -48,7 +48,7 @@ const DetailsPayments = () => {
     try {
       // console.log({ ...state });
       const res = await axios.post(
-        `${process.env.REACT_APP_SERVER_API}/api/payment/add`,
+        `${process.env.REACT_APP_SERVER_API}/payment/add`,
         {
           orderNumber: ordernumber,
           methodCheckout: chanelPayment,
@@ -61,7 +61,6 @@ const DetailsPayments = () => {
           },
         }
       );
-      console.log(res);
       setState({ ...state, referDirect: true });
     } catch (error) {
       console.log(error);

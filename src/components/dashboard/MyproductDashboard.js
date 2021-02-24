@@ -41,7 +41,7 @@ const MyproductDashboard = () => {
 
   const Mycatogories = () => {
     if (categories !== "ไม่พบข้อมูล") {
-      categories.map((catogory) => {
+      return categories.map((catogory) => {
         return Object.values(catogory.products).map((product) => {
           return (
             <tr>
@@ -85,9 +85,9 @@ const MyproductDashboard = () => {
         <p className="btn btn-primary mb-3">เพิ่มสินค้าที่ต้องการขาย</p>
       </Link>
 
-      <table className="table">
+      <table className="table table-striped table-hover">
         <thead>
-          <tr>
+          <tr className="table-head ">
             <th scope="col" className="col-sm-1 text-center">
               ลำดับที่
             </th>

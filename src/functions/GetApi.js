@@ -231,3 +231,19 @@ export const getOrderDetails = async (ordernumber) => {
     return "ไม่พบข้อมูล";
   }
 };
+
+export const getPaymentByOrderNumber = async (ordernumber) => {
+  try {
+    const res = await axios.get(
+      `${process.env.REACT_APP_SERVER_API}/getpayment/${ordernumber}`,
+      {
+        headers: {
+          Authorization: `Bearer ${isAuth()}`,
+        },
+      }
+    );
+    return res.data;
+  } catch (error) {
+    return "ไม่พบข้อมูล";
+  }
+};

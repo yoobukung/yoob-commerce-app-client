@@ -1,5 +1,9 @@
 import { useEffect, useState, Fragment } from "react";
-import { getOrderForShipping } from "../../functions/GetApi";
+import {
+  getOrderForShipping,
+  getAddressById,
+  getPaymentByOrderNumber,
+} from "../../functions/GetApi";
 import axios from "axios";
 import { isAuth } from "../../functions/auth";
 
@@ -9,14 +13,16 @@ const Shipping = () => {
     shippingCode: "",
     orderNumber: "",
     address: [],
+    details: [],
   });
 
   let index = 0;
 
-  const { orderNumber, orderItems, shippingCode, address } = state;
+  const { orderNumber, orderItems, shippingCode, details, address } = state;
 
   useEffect(async () => {
     const res = await getOrderForShipping();
+    console.log(res);
     setState({ ...state, orderItems: res, shippingCode: "" });
   }, []);
 
@@ -46,9 +52,25 @@ const Shipping = () => {
     }
   };
 
+  const handleView = (id, number) => async () => {
+    try {
+      const res = await getAddressById(id);
+      const payment = await getPaymentByOrderNumber(number);
+      setState({
+        ...state,
+        address: res,
+        orderNumber: number,
+        details: payment,
+      });
+      console.log(payment);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const bodyorderItems = () => {
     if (orderItems !== "ไม่พบข้อมูล") {
-      orderItems.map((order) => {
+      return orderItems.map((order) => {
         return order.products.map((prod) => {
           return (
             <Fragment key={prod.id}>
@@ -66,6 +88,14 @@ const Shipping = () => {
                     ? prod.orderItem.codeShipping
                     : "ยังไม่ส่งสินค้า"}
                 </td>
+                <td className="text-center ">
+                  <p
+                    onClick={handleView(order.id, order.orderNumber)}
+                    className="btn btn-sm btn-warning"
+                  >
+                    View
+                  </p>
+                </td>
               </tr>
             </Fragment>
           );
@@ -77,6 +107,7 @@ const Shipping = () => {
   return (
     <div className="container">
       <h1>หน้าต่างสำหรับการส่งของ</h1>
+
       <form onSubmit={handleSubmit}>
         <label>ใส่เลขที่ใบสั่งซื้อ</label>
         <input
@@ -98,7 +129,24 @@ const Shipping = () => {
           บันทึกรหัสการขนส่ง
         </button>
       </form>
-      <table className="table table-hover mt-4 ">
+
+      <div className="row my-4">
+        <div className="col">
+          ที่อยู่สำหรับจัดส่ง
+          <p>
+            {address.name} {address.address} {address.telephon}
+          </p>
+        </div>
+        <div className="col">
+          <p>การชำระเงิน</p>
+          <p>
+            {details.methodCheckout} <br />
+            จำนวน {details.amountPrice} บาท วันที่ {details.datePayment}
+          </p>
+        </div>
+      </div>
+
+      <table className="table table-striped table-hover mt-4 ">
         <thead>
           <tr className="text-center">
             <th scope="col-2">ลำดับที่</th>
@@ -106,7 +154,7 @@ const Shipping = () => {
             <th scope="col-5">ชื่อสินค้า</th>
             <th scope="col-3">จำนวนที่ต้องส่ง</th>
             <th scope="col-2">รหัสส่งสินค้า</th>
-            <th scope="col-2">ดูที่อยู่</th>
+            <th scope="col-2">ดูรายละเอียด</th>
           </tr>
         </thead>
         <tbody>{bodyorderItems()}</tbody>

@@ -77,9 +77,9 @@ const CartTable = () => {
       <Link to="/checkout" className="btn btn-success ms-3">
         ชำระค่าสินค้า
       </Link>
-      <table className="table table-hover mt-4 ">
+      <table className="table table-striped table-hover mt-4 ">
         <thead>
-          <tr className="text-center">
+          <tr className="text-center ">
             <th scope="col-1">ลำดับที่</th>
             <th scope="col-3">ชื่อสินค้า</th>
             <th scope="col-2">ราคา</th>

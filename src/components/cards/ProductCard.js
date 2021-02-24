@@ -25,38 +25,37 @@ const ProductCard = ({}) => {
   };
 
   return (
-    <div className="row ">
-      {isError ? (
-        <h3>Error fetching data</h3>
-      ) : isLoading ? (
-        <h3>Loading data ...</h3>
-      ) : (
-        <Fragment>
-          {data == undefined || "ไม่มีสินค้าเหลืออยู่" ? (
-            <h3>ไม่พบสินค้า</h3>
-          ) : (
-            <ProductList products={data.data} />
-          )}
-        </Fragment>
-      )}
-
-      {isError ? (
-        <h3>Error fetching data</h3>
-      ) : isLoading ? (
-        <h3>Loading data ...</h3>
-      ) : (
-        <nav className="text-center mt-5">
-          <Pagination
-            defaultCurrent={1}
-            defaultPageSize={3}
-            total={data.all == undefined ? 0 : data.all.length}
-            showTotal={(total, range) =>
-              `${range[0]}-${range[1]} of ${total} items`
-            }
-            onChange={handlePageChange}
-          />
-        </nav>
-      )}
+    <div>
+      <div className="row ">
+        {isError ? (
+          <h3>Error fetching data</h3>
+        ) : isLoading ? (
+          <h3>Loading data ...</h3>
+        ) : data.data == undefined ? (
+          <p>data Undefined</p>
+        ) : (
+          <Fragment>{<ProductList products={data.data} />}</Fragment>
+        )}
+      </div>
+      <footer>
+        {isError ? (
+          <h3>Error fetching data</h3>
+        ) : isLoading ? (
+          <h3>Loading data ...</h3>
+        ) : (
+          <nav className="text-center mt-5">
+            <Pagination
+              defaultCurrent={1}
+              defaultPageSize={3}
+              total={data.all == undefined ? 0 : data.all.length}
+              showTotal={(total, range) =>
+                `${range[0]}-${range[1]} of ${total} items`
+              }
+              onChange={handlePageChange}
+            />
+          </nav>
+        )}
+      </footer>
     </div>
   );
 };

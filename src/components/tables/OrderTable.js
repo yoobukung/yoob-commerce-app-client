@@ -17,7 +17,7 @@ const OrderTable = () => {
 
   const orderBody = () => {
     if (orders !== "ไม่พบข้อมูล") {
-      orders.map((order) => {
+      return orders.map((order) => {
         return (
           <tr>
             <th className="text-center">{(index += index + 1)}</th>
@@ -45,7 +45,7 @@ const OrderTable = () => {
   return (
     <div className="container">
       <h3>รายการสั่งซื้อ</h3>
-      <table className="table">
+      <table className="table table-striped table-hover">
         <thead>
           <tr>
             <th scope="col" className="col-1 text-center">

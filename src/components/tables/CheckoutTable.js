@@ -14,7 +14,7 @@ const CheckoutTable = () => {
     myAddress: [],
     myItems: [],
     methodCheckOut: "",
-    shipping: 50,
+    shipping: 0,
     referDirect: false,
   });
 
@@ -88,7 +88,7 @@ const CheckoutTable = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:5100/api/order/add",
+        `${process.env.REACT_APP_SERVER_API}/order/add`,
         {
           addressNumber: isAddressNo(),
           methodCheckout: methodCheckOut,
@@ -112,7 +112,7 @@ const CheckoutTable = () => {
     return (
       <div className="container">
         <Fragment>
-          <table className="table table-hover mt-4 ">
+          <table className="table table-striped table-hover mt-4 ">
             <thead>
               <tr className="text-center">
                 <th scope="col-1">ลำดับที่</th>

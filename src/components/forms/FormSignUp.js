@@ -20,12 +20,16 @@ const FormSignup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setState({ ...state, success: "", error: "" });
     try {
-      await axios.post(`${process.env.REACT_APP_SERVER_API}/register`, {
-        username,
-        email,
-        password,
-      });
+      const res = await axios.post(
+        `${process.env.REACT_APP_SERVER_API}/register`,
+        {
+          username,
+          email,
+          password,
+        }
+      );
       setState({
         ...state,
         success: "การสมัครสมาชิกสำเร็จ",
@@ -33,9 +37,19 @@ const FormSignup = () => {
         buttonText: "สมัครสมาชิกเรียบร้อย",
       });
     } catch (error) {
+      if (error.response != null || undefined) {
+        if (error.response.status === 422) {
+          setState({
+            ...state,
+            error: error.response.data.errors,
+            success: "",
+            buttonText: "สมัครสมาชิก",
+          });
+        }
+      }
       setState({
         ...state,
-        error: "เกิดความผิดพลาดไม่สามารถสมัครสมาชิกได้",
+        error: "เกิดความผิดพลาด username หรือ email นี้ถูกใช้แล้ว",
         success: "",
         buttonText: "สมัครสมาชิก",
       });
@@ -66,6 +80,7 @@ const FormSignup = () => {
             className="form-control"
             onChange={handleChange("username")}
             value={username}
+            required
           />
         </div>
 
@@ -76,6 +91,7 @@ const FormSignup = () => {
             className="form-control"
             onChange={handleChange("email")}
             value={email}
+            required
           />
         </div>
 
@@ -86,6 +102,7 @@ const FormSignup = () => {
             className="form-control"
             onChange={handleChange("password")}
             value={password}
+            required
           />
         </div>
 

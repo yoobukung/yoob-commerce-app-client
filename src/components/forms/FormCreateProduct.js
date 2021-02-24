@@ -45,7 +45,7 @@ const FormCreateProduct = () => {
 
   const categoryChoice = () => {
     if (categories !== "ไม่พบข้อมูล") {
-      categories.map((cate) => {
+      return categories.map((cate) => {
         return (
           <option key={cate.id} data-key={cate.id}>
             {cate.name}{" "}

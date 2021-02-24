@@ -27,6 +27,7 @@ import MyproductDashboard from "./components/dashboard/MyproductDashboard";
 import "./style/base.css";
 import AdminRouter from "./components/core/AdminRouter";
 import FormAddress from "./components/forms/FormAddress";
+import Doc from "./Pages/Doc";
 
 const MainRouter = () => {
   return (
@@ -35,6 +36,7 @@ const MainRouter = () => {
       <main>
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route exact path="/doc" component={Doc} />
           <Route exact path="/signin" component={Login} />
           <Route exact path="/signup" component={Register} />
           <AdminRouter exact path="/categories" component={Categories} />
