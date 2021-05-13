@@ -5,6 +5,7 @@
 ## Introduction
 โค้ดทั้งหมดนี้เป็นโปรเจคต้นๆ หลังจากที่ผมเริ่มเขียนโปรแกรมมาได้สักพักนึงประมาณ 7 เดือน
 โปรเจคนี้เขียนขึ้นโดยใช้ React Framework ใช้สำหรับเป็นหน้าเว็บไซต์ [E-commerce](https://mycommerce-app-001.firebaseapp.com/)
+รองรับ Reponsive website ด้วย bootstrap สำหรับฐานข้อมูล
 ใข้ Postgresql เป็นฐานข้อมูล และใช้ library sequelize สำหรับให้ node.js เชื่อมต่อข้อมูล
 
 ## Server
